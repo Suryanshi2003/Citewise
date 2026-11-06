@@ -1,7 +1,7 @@
+# Frontend
 node_modules/
 dist/
 .angular/
-*.log
 
 # Backend
 venv/
@@ -9,4 +9,12 @@ venv/
 __pycache__/
 *.pyc
 .env
+.env.*
+!.env.example
 backend/storage/
+
+# IntelliJ
+.idea/
+
+# Logs
+*.log
