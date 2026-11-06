@@ -1,0 +1,119 @@
+/* ===== CiteWise theme: warm library / research-paper browns ===== */
+:root {
+  --paper: #f3e8d3;
+  --paper-dark: #e8d9bd;
+  --card: #fcf7ea;
+  --ink: #3a2417;
+  --ink-soft: #6e4e3a;
+  --brown: #7b4a2b;
+  --brown-dark: #4a2c1a;
+  --caramel: #c47f3c;
+  --sage: #5f7f52;
+  --rust: #b0503a;
+  --line: #dbc8a5;
+  --highlight: #f6dc7a;
+  --radius: 14px;
+  --shadow: 0 1px 0 rgba(74, 44, 26, 0.1), 0 14px 28px -16px rgba(74, 44, 26, 0.45);
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; min-height: 100%; }
+
+body {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink);
+  background-color: var(--paper);
+  /* faint paper grain + soft vignette */
+  background-image:
+    radial-gradient(rgba(123, 74, 43, 0.1) 1px, transparent 1px),
+    radial-gradient(ellipse at top, rgba(255, 255, 255, 0.45), transparent 60%);
+  background-size: 22px 22px, 100% 100%;
+  background-attachment: fixed;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: var(--brown-dark);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.hand { font-family: 'Caveat', cursive; font-weight: 700; }
+
+::selection { background: var(--highlight); color: var(--ink); }
+
+/* ---------- Buttons ---------- */
+button { font-family: inherit; cursor: pointer; }
+
+.btn {
+  background: var(--brown);
+  color: #fff8e8;
+  border: 0;
+  border-radius: 10px;
+  padding: 0.6rem 1.15rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  box-shadow: 0 3px 0 var(--brown-dark);
+  transition: transform 0.12s, box-shadow 0.12s, background 0.12s;
+}
+.btn:hover:not(:disabled) { background: #8d5632; transform: translateY(-1px); }
+.btn:active:not(:disabled) { transform: translateY(2px); box-shadow: 0 1px 0 var(--brown-dark); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--brown);
+  border: 1.5px solid var(--brown);
+  border-radius: 10px;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background 0.12s;
+}
+.btn-ghost:hover:not(:disabled) { background: rgba(123, 74, 43, 0.1); }
+.btn-ghost:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ---------- Inputs ---------- */
+.input {
+  width: 100%;
+  background: #fffaf0;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  padding: 0.6rem 0.8rem;
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+.input::placeholder { color: #a88f76; }
+.input:focus { outline: 2px solid var(--caramel); outline-offset: 1px; border-color: var(--caramel); }
+
+/* ---------- Surfaces ---------- */
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.error-note {
+  background: #f8e1d8;
+  color: #8a3320;
+  border: 1px solid #e8b9a8;
+  border-radius: 10px;
+  padding: 0.55rem 0.8rem;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* ---------- Scrollbars ---------- */
+* { scrollbar-width: thin; scrollbar-color: #c9b08a transparent; }
+
+@keyframes pop-in { from { opacity: 0; transform: translateY(6px) scale(0.98); } to { opacity: 1; transform: none; } }
+@keyframes bob { 0%, 100% { transform: translateY(0) rotate(var(--tilt, 0deg)); } 50% { transform: translateY(-5px) rotate(var(--tilt, 0deg)); } }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}

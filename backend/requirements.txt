@@ -1,0 +1,32 @@
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+python-multipart==0.0.9
+sqlalchemy==2.0.35
+pydantic==2.9.2
+pydantic-settings==2.5.2
+email-validator==2.2.0
+
+# Auth
+bcrypt==4.2.0
+PyJWT==2.9.0
+google-auth==2.35.0   # verifies Google sign-in tokens
+requests==2.32.3      # used by google-auth to download Google's public keys
+
+# LangChain
+langchain==0.3.1
+langchain-community==0.3.1
+langchain-groq==0.2.0
+langchain-huggingface==0.1.0
+
+# Extraction
+pymupdf==1.24.10
+python-docx==1.1.2
+
+# Retrieval
+faiss-cpu==1.8.0.post1
+rank-bm25==0.2.2
+sentence-transformers==3.1.1
+
+# Utils
+numpy==1.26.4
+python-dotenv==1.0.1
