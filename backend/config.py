@@ -30,7 +30,7 @@ class Settings(BaseSettings):
 
     # --- LLM / Embeddings ---
     google_api_key: str = ""          # Gemini key from aistudio.google.com
-    gemini_model: str = "gemini-4-carbon"
+    gemini_model: str = "gemini-3.8-flash"
     embedding_model: str = "BAAI/bge-small-en-v1.5"
     reranker_model: str = "cross-encoder/ms-marco-MiniLM-L-6-v2"
     embedding_dim: int = 384  # bge-small-en-v1.5 output dim
@@ -59,7 +59,7 @@ class Settings(BaseSettings):
     auth_rate_limit_per_minute: int = 10
 
     # --- CORS: comma-separated list of frontend URLs ---
-    frontend_origins: str = "https://citewise-ai-assistant-frontend.vercel.app"
+    frontend_origins: str = "https://citewise-ai-assistant-frontend.vercel.app","http://localhost:4200/"
 
     # Derived paths (all inside data_dir)
     @property

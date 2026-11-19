@@ -133,9 +133,12 @@ async def ask(
                 yield _sse({"token": token})
             if not full_answer.strip():
                 raise RuntimeError("LLM returned an empty answer")
-        except Exception:
+        except Exception as exc:
             logger.exception("Answer generation failed: user=%s session=%s", user_id, session_id)
-            yield _sse({"error": "The AI service had a problem. Please try again in a moment."})
+            message = "The AI service had a problem. Please try again in a moment."
+            if not settings.is_production:  # show the real reason only while developing
+                message += f" ({type(exc).__name__}: {str(exc)[:300]})"
+            yield _sse({"error": message})
             return
 
         try:
