@@ -59,7 +59,7 @@ class Settings(BaseSettings):
     auth_rate_limit_per_minute: int = 10
 
     # --- CORS: comma-separated list of frontend URLs ---
-    frontend_origins: str = "http://localhost:4200"
+    frontend_origins: str = "https://citewise-2.onrender.com/"
 
     # Derived paths (all inside data_dir)
     @property
