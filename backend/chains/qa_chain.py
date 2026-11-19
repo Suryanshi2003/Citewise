@@ -3,7 +3,7 @@ The actual LangChain "chain" for answer generation. Built with LCEL
 (prompt | llm) rather than a legacy Chain class, which is the current
 LangChain-recommended pattern and streams naturally.
 """
-from langchain_groq import ChatGroq
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
@@ -49,18 +49,26 @@ prompt = ChatPromptTemplate.from_messages([
     ("human", USER_PROMPT),
 ])
 
-llm = ChatGroq(
-    api_key=settings.groq_api_key,
-    model=settings.groq_model,
-    temperature=0.1,
-    streaming=True,
-    max_tokens=900,   # cap answer length (cost + abuse guardrail)
-    timeout=45,       # don't hang forever if Groq is slow
-    max_retries=2,
-)
+_chain = None
 
-# LCEL chain: prompt -> llm -> string output
-qa_chain = prompt | llm | StrOutputParser()
+
+def get_chain():
+    """
+    Build the chain (prompt -> llm -> string) on first use, not at import time,
+    so the server can still start if GOOGLE_API_KEY is missing.
+    """
+    global _chain
+    if _chain is None:
+        llm = ChatGoogleGenerativeAI(
+            google_api_key=settings.google_api_key,
+            model=settings.gemini_model,
+            temperature=0.1,
+            max_output_tokens=2048,  # Gemini 2.5 also spends this on "thinking", so keep it generous
+            timeout=45,
+            max_retries=2,
+        )
+        _chain = prompt | llm | StrOutputParser()
+    return _chain
 
 
 def build_context_block(chunks: list[models.ParentChunk], sources: list[dict]) -> str:
@@ -84,7 +92,7 @@ def format_chat_history(messages: list[models.ChatMessage], max_turns: int = 5) 
 
 async def stream_answer(question: str, context_block: str, chat_history_text: str):
     """Async generator yielding answer tokens as they arrive from Groq."""
-    async for token in qa_chain.astream({
+    async for token in get_chain().astream({
         "context": context_block,
         "question": question,
         "chat_history": chat_history_text,

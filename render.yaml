@@ -9,7 +9,7 @@ services:
     # The AI models + PyTorch need roughly 1 GB of RAM, so a 512 MB plan will
     # likely crash. "standard" (2 GB) is the safe choice. Persistent disks
     # are only available on PAID plans.
-    plan: standard
+    plan: free
     healthCheckPath: /health
     # The persistent disk: everything saved under /data survives restarts and redeploys.
     disk:
@@ -23,7 +23,7 @@ services:
         value: /data
       - key: SECRET_KEY
         generateValue: true      # Render creates a random secret for you
-      - key: GROQ_API_KEY
+      - key: GOOGLE_API_KEY
         sync: false              # you paste this in the dashboard (never in git)
       - key: GOOGLE_CLIENT_ID
         sync: false              # from Google Cloud Console (see README), leave blank to hide the button

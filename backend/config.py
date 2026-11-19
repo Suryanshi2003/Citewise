@@ -29,8 +29,8 @@ class Settings(BaseSettings):
     google_client_id: str = ""
 
     # --- LLM / Embeddings ---
-    groq_api_key: str = ""
-    groq_model: str = "openai/gpt-oss-20b"
+    google_api_key: str = ""          # Gemini key from aistudio.google.com
+    gemini_model: str = "gemini-4-carbon"
     embedding_model: str = "BAAI/bge-small-en-v1.5"
     reranker_model: str = "cross-encoder/ms-marco-MiniLM-L-6-v2"
     embedding_dim: int = 384  # bge-small-en-v1.5 output dim
