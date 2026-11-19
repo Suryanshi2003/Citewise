@@ -28,7 +28,7 @@ async def lifespan(app: FastAPI):
         if stuck:
             logger.warning("Marked %d interrupted document(s) as failed", stuck)
         bm25_store.rebuild(db)
-    if not settings.groq_api_key:
+    if not settings.google_api_key:
         logger.warning("GOOGLE_API_KEY is not set — chat answers will fail")
     logger.info("CiteWise API started (environment=%s, data_dir=%s)", settings.environment, settings.data_dir)
     yield
