@@ -12,9 +12,9 @@ PyJWT==2.9.0
 google-auth==2.35.0   # verifies Google sign-in tokens
 requests==2.32.3      # used by google-auth to download Google's public keys
 
+
 # LangChain
 langchain==0.3.30
-langchain-community==0.3.31
 langchain-google-genai==2.1.12
 langchain-huggingface==0.3.1
 
