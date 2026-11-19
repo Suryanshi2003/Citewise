@@ -59,7 +59,7 @@ class Settings(BaseSettings):
     auth_rate_limit_per_minute: int = 10
 
     # --- CORS: comma-separated list of frontend URLs ---
-    frontend_origins: str = "https://citewise-ai-research-assistant-fron-beta.vercel.app"
+    frontend_origins: str = "https://citewise-ai-assistant-frontend.vercel.app"
 
     # Derived paths (all inside data_dir)
     @property
